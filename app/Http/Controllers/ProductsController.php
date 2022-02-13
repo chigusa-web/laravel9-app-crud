@@ -71,7 +71,11 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+
+        return view('product.edit', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -81,9 +85,13 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->fill($request->all())->save();
+
+        // 一覧へ戻り完了メッセージを表示
+        return redirect()->route('product.index')->with('message', '編集しました');
     }
 
     /**
