@@ -102,6 +102,10 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        Product::where('id', $id)->delete();
+
+        // 完了メッセージを表示
+        return redirect()->route('product.index')->with('message', '削除しました');
     }
 }
