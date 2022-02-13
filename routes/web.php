@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+use App\Http\Controllers\ProductsController;
+
+// 商品マスタ ルーティング一覧(showは使わない)
+Route::resource('product', ProductsController::class, ['except' => ['show']]);
