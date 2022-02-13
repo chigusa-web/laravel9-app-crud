@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Http\Requests\ProductRequest;
 
 class ProductsController extends Controller
 {
@@ -14,13 +15,13 @@ class ProductsController extends Controller
      */
     public function index()
     {
-      // 商品一覧
-      $products = Product::all();
+        // 商品一覧
+        $products = Product::all();
 
-      return view(
-          'product.index',
-          ['products' => $products]
-      );
+        return view(
+            'product.index',
+            ['products' => $products]
+        );
     }
 
     /**
@@ -30,7 +31,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.create');
     }
 
     /**
@@ -39,9 +40,16 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+
+        $product = new Product;
+
+        // fillを使用する場合は、必ずモデルのfillableを指定する
+        $product->fill($request->all())->save();
+
+        // 一覧へ戻り完了メッセージを表示
+        return redirect()->route('product.index')->with('message', '登録しました');
     }
 
     /**
