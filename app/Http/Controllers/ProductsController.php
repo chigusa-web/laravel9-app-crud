@@ -16,7 +16,9 @@ class ProductsController extends Controller
     public function index()
     {
         // 商品一覧
-        $products = Product::all();
+        //$products = Product::all();
+        // ページネーション
+        $products = Product::paginate(5);
 
         return view(
             'product.index',
