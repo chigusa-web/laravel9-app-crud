@@ -6,6 +6,8 @@ Laravel9 を使用した CRUD アプリケーションの実装。
 デザインは laravel-adminlte を使用。  
 ページネーションにも対応。
 
+![](image.png)
+
 ## クローン
 
 Sail を使用して環境を構築しています。  
